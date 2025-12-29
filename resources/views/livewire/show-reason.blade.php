@@ -7,7 +7,7 @@
         class="group w-full max-w-2xl transform cursor-pointer rounded-xl sm:rounded-2xl bg-white p-6 sm:p-8 md:p-10 shadow-xl ring-2 sm:ring-4 ring-yellow-500 ring-offset-2 sm:ring-offset-4 ring-offset-blue-700 transition-all duration-300 hover:scale-105 active:scale-95"
     >
         <div class="mb-3 sm:mb-4 inline-block rounded-full bg-yellow-500 px-3 sm:px-4 py-1">
-            <span class="text-xs sm:text-sm font-semibold text-white">We 💛 Music City</span>
+            <span class="text-xs sm:text-sm font-semibold text-white">We 💙 Music City</span>
         </div>
 
         <h1 class="mb-4 sm:mb-6 text-2xl sm:text-3xl md:text-4xl font-bold leading-tight text-gray-900">
