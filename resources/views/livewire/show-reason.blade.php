@@ -13,9 +13,15 @@
                 I want you to stay in Nashville...
             </h1>
 
+            @if($reason)
             <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-gray-700">
                 {{ $reason->reason }}
             </p>
+            @else
+                <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-gray-700">
+                    No one has added a reason yet, be the first!
+                </p>
+            @endif
 
             <!-- Optional: subtle bottom accent -->
             <div class="mt-4 sm:mt-6 h-1 w-16 sm:w-20 rounded-full bg-gradient-to-r from-yellow-500 to-yellow-600"></div>
