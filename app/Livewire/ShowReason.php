@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class ShowReason extends Component
 {
-    public ?Reason $reason;
+    public Reason $reason;
 
     public bool $showForm = false;
     public string $newReason = '';
@@ -44,7 +44,17 @@ class ShowReason extends Component
 
     public function render(): View
     {
-        $this->reason = Reason::all()->random(1)->first() ?? [];
+        // Try to get one random reason from the database
+        $randomReason = Reason::inRandomOrder()->first();
+
+        // If one exists, assign it. If not, create a "dummy" model
+        // or handle the empty state so the property isn't uninitialized.
+        if ($randomReason) {
+            $this->reason = $randomReason;
+        } else {
+            // Option A: Create a blank model so the UI doesn't crash
+            $this->reason = new Reason(['reason' => 'No reasons found yet. Add one below!']);
+        }
 
         return view('livewire.show-reason');
     }
