@@ -44,7 +44,7 @@ class ShowReason extends Component
 
     public function render(): View
     {
-        $this->reason = Reason::all()->random(1)->first();
+        $this->reason = Reason::all()->random(1)->first() ?? [];
 
         return view('livewire.show-reason');
     }
