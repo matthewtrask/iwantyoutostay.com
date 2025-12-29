@@ -9,7 +9,9 @@ use Livewire\Component;
 
 class ShowReason extends Component
 {
-    public Reason $reason;
+    public ?Reason $reason = null;
+
+    public string $default = '';
 
     public bool $showForm = false;
     public string $newReason = '';
@@ -35,25 +37,36 @@ class ShowReason extends Component
         $this->reset('newReason');
     }
 
-    public function refresh()
+    public function refresh(): void
     {
-        $this->reason = Reason::where('id', '!=', $this->reason->id)
+        usleep(500000);
+
+        $nextReason = Reason::approved()
+            ->when($this->reason, function ($query) {
+                return $query->where('id', '!=', $this->reason->id);
+            })
             ->inRandomOrder()
             ->first();
+
+        if (!$nextReason) {
+            $nextReason = Reason::approved()->inRandomOrder()->first();
+        }
+
+        if ($nextReason) {
+            $this->reason = $nextReason;
+        } else {
+            $this->reason = null;
+            $this->default = 'No one has added a reason yet, be the first!';
+        }
     }
 
     public function render(): View
     {
-        // Try to get one random reason from the database
-        $randomReason = Reason::inRandomOrder()->first();
-
-        // If one exists, assign it. If not, create a "dummy" model
-        // or handle the empty state so the property isn't uninitialized.
+        $randomReason = Reason::approved()->inRandomOrder()->first();
         if ($randomReason) {
             $this->reason = $randomReason;
         } else {
-            // Option A: Create a blank model so the UI doesn't crash
-            $this->reason = new Reason(['reason' => 'No reasons found yet. Add one below!']);
+            $this->default = 'No one has added a reason yet, be the first!';
         }
 
         return view('livewire.show-reason');
