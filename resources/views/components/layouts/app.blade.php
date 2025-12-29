@@ -3,6 +3,19 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Meta Description -->
+        <meta name="description" content="Discover snarky and petty reasons to stay in Nashville. From people who are genuinely sick of the way residents in the city are treated.">
+
+        <!-- Meta Keywords (optional, not used by most search engines) -->
+        <meta name="keywords" content="Nashville, Music City, stay in Nashville, Nashville reasons, why Nashville, Nashville Tennessee, move to Nashville, Nashville life, Nashville living, reasons to stay, Nashville community, Nashville love, mayor of nashville, I want you to stay, choose how you move">
+
+        <!-- Open Graph / Social Media -->
+        <meta property="og:title" content="I Want You to Stay in Nashville">
+        <meta property="og:description" content="Reasons to stay in Music City lol">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://iwantyoutostay.com">
+        <meta property="og:image" content="https://iwantyoutostay.com/reasons.png">
+
 
         <title>{{ $title ?? 'Page Title' }}</title>
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
