@@ -17,7 +17,7 @@
         <meta property="og:image" content="https://iwantyoutostay.com/reasons.png">
 
 
-        <title>{{ $title ?? 'Page Title' }}</title>
+        <title>{{ $title ?? 'I want you to stay lol' }}</title>
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @else
