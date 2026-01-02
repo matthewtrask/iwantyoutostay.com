@@ -1,6 +1,6 @@
 <?php
 
 use App\Jobs\SendPendingReasonsEmail;
-use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Support\Facades\Schedule;
 
 Schedule::job(new SendPendingReasonsEmail())->everyTwoHours();
