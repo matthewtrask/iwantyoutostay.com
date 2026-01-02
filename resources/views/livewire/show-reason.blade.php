@@ -61,13 +61,20 @@
 
 <div class="fixed bottom-4 sm:bottom-8 right-4 sm:right-8 z-50">
     @if(!$showForm)
-        <button wire:click.stop="toggleForm" class="group flex items-center gap-2 rounded-full bg-yellow-500 px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-semibold text-white shadow-lg transition-all duration-300 hover:bg-yellow-600 hover:shadow-xl">
-            <span class="hidden sm:inline">Add Your Reason</span>
-            <span class="sm:hidden">Add Reason</span>
-            <svg class="h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-            </svg>
-        </button>
+        <div class="flex flex-col items-stretch gap-2 w-full sm:w-auto sm:min-w-[200px]">
+            <div class="rounded-full bg-white border-2 border-yellow-500 px-3 sm:px-4 py-1 shadow-lg animate-pulse-slow">
+            <span class="text-xs sm:text-sm font-semibold text-gray-900 whitespace-nowrap">
+                <span class="text-yellow-600">{{ $reasonCount }}</span> reasons and counting!
+            </span>
+            </div>
+            <button wire:click.stop="toggleForm" class="group flex items-center justify-center gap-2 rounded-full bg-yellow-500 px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-semibold text-white shadow-lg transition-all duration-300 hover:bg-yellow-600 hover:shadow-xl">
+                <span class="hidden sm:inline">Add Your Reason</span>
+                <span class="sm:hidden">Add Reason</span>
+                <svg class="h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                </svg>
+            </button>
+        </div>
     @else
         <div
             x-data
@@ -78,6 +85,8 @@
             class="fixed inset-x-4 bottom-4 sm:inset-x-auto sm:bottom-8 sm:right-8 sm:w-96 rounded-2xl bg-white p-5 sm:p-6 shadow-2xl ring-2 sm:ring-4 ring-yellow-500 max-h-[90vh] overflow-y-auto"
         >
             <div class="mb-4 flex items-center justify-between">
+
+
                 <h3 class="text-lg sm:text-xl font-bold text-gray-900">Add Your Reason</h3>
                 <button wire:click.stop="toggleForm" class="text-gray-400 transition-colors hover:text-gray-600 p-1">
                     <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

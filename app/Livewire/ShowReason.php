@@ -9,6 +9,8 @@ use Livewire\Component;
 class ShowReason extends Component
 {
     public ?Reason $reason = null;
+    public int $reasonCount = 0;
+
     public string $default = '';
     public bool $showForm = false;
     public string $newReason = '';
@@ -23,6 +25,7 @@ class ShowReason extends Component
     public function loadInitialReason(): void
     {
         $this->reason = Reason::approved()->inRandomOrder()->first();
+        $this->reasonCount = Reason::approved()->count() ?? 0;
         if (!$this->reason) {
             $this->default = 'No one has added a reason yet, be the first!';
         }
