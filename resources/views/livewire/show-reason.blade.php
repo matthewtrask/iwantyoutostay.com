@@ -4,9 +4,7 @@
 
 <div class="relative flex flex-grow items-center justify-center p-4 sm:p-6 md:p-8">
 
-    <div class="group relative w-full max-w-2xl rounded-xl sm:rounded-2xl bg-white shadow-xl ring-2 sm:ring-4 ring-yellow-500 ring-offset-2 sm:ring-offset-4 ring-offset-blue-700 transition-all duration-300">
-
-        <div
+    <div class="group relative w-full max-w-2xl rounded-xl sm:rounded-2xl bg-white shadow-xl ring-2 sm:ring-4 ring-yellow-500 ring-offset-2 sm:ring-offset-4 ring-offset-blue-700 transition-shadow duration-300">        <div
             wire:click="refresh"
             class="absolute inset-0 z-10 cursor-pointer rounded-xl sm:rounded-2xl"
         ></div>
@@ -27,30 +25,30 @@
                 I want you to stay in Nashville...
             </h1>
 
-            <div
-                wire:key="reason-{{ $reason?->id ?? 'default' }}"
-                x-data="{ show: false }"
-                x-init="setTimeout(() => show = true, 50)"
-                x-show="show"
-                x-transition:enter="transition ease-out duration-500"
-                x-transition:enter-start="opacity-0 translate-y-4"
-                x-transition:enter-end="opacity-100 translate-y-0"
-            >
-                @if(! is_null($reason))
-                    <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-gray-700 font-medium italic">
-                        "{{ $reason->reason }}"
-                    </p>
-                @else
-                    <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-gray-700 font-medium italic">
-                        "{{ $default }}"
-                    </p>
-                @endif
+            <div class="relative h-[160px] sm:h-[200px] w-full grid place-items-center overflow-hidden">
+                <div
+                    wire:key="reason-{{ $reason?->id ?? 'default' }}"
+                    wire:replace
+                    class="w-full text-center col-start-1 row-start-1"
+                >
+                    @if(! is_null($reason))
+                        <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-gray-700 font-medium italic">
+                            "{{ $reason->reason }}"
+                        </p>
+                    @else
+                        <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-gray-700 font-medium italic">
+                            "{{ $default }}"
+                        </p>
+                    @endif
+                </div>
             </div>
 
             <div class="mt-4 sm:mt-6 flex items-center justify-between">
                 <div class="h-1 w-16 sm:w-20 rounded-full bg-gradient-to-r from-yellow-500 to-yellow-600"></div>
-                <div wire:loading wire:target="refresh" class="text-yellow-600 animate-pulse text-xs font-bold uppercase">
-                    Finding another...
+                <div class="h-5 flex items-center">
+                    <div wire:loading wire:target="refresh" class="text-yellow-600 animate-pulse text-xs font-bold uppercase">
+                        Finding another...
+                    </div>
                 </div>
             </div>
 
