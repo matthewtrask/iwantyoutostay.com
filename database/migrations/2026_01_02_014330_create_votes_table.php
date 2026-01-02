@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reasons', function (Blueprint $table) {
+        Schema::create('votes', function (Blueprint $table) {
             $table->id();
-            $table->string('reason');
-            $table->string('context')->nullable();
-            $table->boolean('approved')->default(false);
+            $table->foreignId('reason_id')->constrained()->onDelete('cascade');
+            $table->string('ip_address');
+            $table->string('type');
             $table->timestamps();
-            $table->softDeletes();
+            $table->unique(['reason_id', 'ip_address']);
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reasons');
+        Schema::dropIfExists('votes');
     }
 };

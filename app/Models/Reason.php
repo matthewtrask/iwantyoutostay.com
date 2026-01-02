@@ -15,4 +15,14 @@ class Reason extends Model
     {
         $query->where('approved', '=', 1);
     }
+
+    public function scopeNotApproved(Builder $query): void
+    {
+        $query->where('approved', '=', 0);
+    }
+
+    public function getScoreAttribute()
+    {
+        return $this->upvotes - $this->downvotes;
+    }
 }

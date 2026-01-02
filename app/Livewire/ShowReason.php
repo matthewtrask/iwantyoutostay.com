@@ -3,19 +3,51 @@
 namespace App\Livewire;
 
 use App\Models\Reason;
-use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use Livewire\Component;
 
 class ShowReason extends Component
 {
     public ?Reason $reason = null;
-
     public string $default = '';
-
     public bool $showForm = false;
     public string $newReason = '';
     public bool $submitted = false;
+
+    // This runs ONCE when the page first loads
+    public function mount(): void
+    {
+        $this->loadInitialReason();
+    }
+
+    public function loadInitialReason(): void
+    {
+        $this->reason = Reason::approved()->inRandomOrder()->first();
+        if (!$this->reason) {
+            $this->default = 'No one has added a reason yet, be the first!';
+        }
+    }
+
+    public function refresh(): void
+    {
+        // Add a tiny delay for the "Finding another..." pulse effect
+        usleep(300000);
+
+        $nextReason = Reason::approved()
+            ->where('id', '!=', $this->reason?->id)
+            ->inRandomOrder()
+            ->first();
+
+        if ($nextReason) {
+            $this->reason = $nextReason;
+        }
+    }
+
+    public function render(): View
+    {
+        // KEEP THIS CLEAN. Don't fetch new random data here.
+        return view('livewire.show-reason');
+    }
 
     public function toggleForm(): void
     {
@@ -35,40 +67,5 @@ class ShowReason extends Component
 
         $this->submitted = true;
         $this->reset('newReason');
-    }
-
-    public function refresh(): void
-    {
-        usleep(500000);
-
-        $nextReason = Reason::approved()
-            ->when($this->reason, function ($query) {
-                return $query->where('id', '!=', $this->reason->id);
-            })
-            ->inRandomOrder()
-            ->first();
-
-        if (!$nextReason) {
-            $nextReason = Reason::approved()->inRandomOrder()->first();
-        }
-
-        if ($nextReason) {
-            $this->reason = $nextReason;
-        } else {
-            $this->reason = null;
-            $this->default = 'No one has added a reason yet, be the first!';
-        }
-    }
-
-    public function render(): View
-    {
-        $randomReason = Reason::approved()->inRandomOrder()->first();
-        if ($randomReason) {
-            $this->reason = $randomReason;
-        } else {
-            $this->default = 'No one has added a reason yet, be the first!';
-        }
-
-        return view('livewire.show-reason');
     }
 }
