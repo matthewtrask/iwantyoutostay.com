@@ -32,8 +32,8 @@
                     class="w-full text-center col-start-1 row-start-1"
                 >
                     @if(! is_null($reason))
-                        <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-gray-700 font-medium italic">
-                            "{{ $reason->reason }}"
+                        <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-gray-700 font-medium italic text-pretty">
+                            "{{ trim($reason->reason) }}"
                         </p>
                     @else
                         <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-gray-700 font-medium italic">
